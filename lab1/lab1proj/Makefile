@@ -1,29 +1,16 @@
-# Компилятор и флаги
-CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++17 -Iinclude -O1
-TARGET := lab1_cpp
+Comp := g++ # используется компилятор g++
+CompFlags := -Wall -Wextra -std=c++17 -Iinclude -O1 #параметры компиляции
 
-# Исходные файлы и объекты
-SRC_DIR := src
-OBJ_DIR := obj
-SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+all: lab1
 
-# Правила сборки
-all: $(TARGET)
+lab1: lab1main.o lab1fact.o 
+	$(Comp) lab1main.o factorial.o -o hello
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+lab1main.o: lab1main.cpp
+	$(Comp) $(CompFlags) lab1main.cpp
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+lab1fact.o: lab1fact.cpp
+	$(Comp) $(CompFlags) lab1fact.cpp
 
-# Создание директории для объектных файлов
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-
-# Очистка
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
-
-.PHONY: all clean
+	rm -rf *.o lab1	
