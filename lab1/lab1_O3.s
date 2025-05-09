@@ -1,3 +1,6 @@
+// команда компиляции: g++ -S -O3 -masm=intel -o lab1_O3.s lab1.cpp
+// 
+// 
 	.file	"lab1.cpp"
 	.intel_syntax noprefix
 	.text
@@ -7,8 +10,8 @@
 __tcf_0:
 .LFB2076:
 	.seh_endprologue
-	lea	rcx, _ZStL8__ioinit[rip]
-	jmp	_ZNSt8ios_base4InitD1Ev
+	lea	rcx, _ZStL8__ioinit[rip] // запись адреса ??? в rcx
+	jmp	_ZNSt8ios_base4InitD1Ev // переход по метке
 	.seh_endproc
 	.p2align 4,,15
 	.globl	_Z4facti
@@ -251,3 +254,4 @@ _GLOBAL__sub_I__Z4facti:
 	.linkonce	discard
 .refptr._ZSt3cin:
 	.quad	_ZSt3cin
+
