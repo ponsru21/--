@@ -1,6 +1,6 @@
 #include <iostream>
 #include "lab1head.h"
-#include "lab1head.cpp"
+#include "lab1fact.cpp"
 using namespace std;
 
 int main () {

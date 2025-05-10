@@ -1,6 +1,6 @@
-#include "../include/math_utils.hpp"
+#include "../include/lab1head.h"
 
-int MathUtils::fact(int a) {
+int lab1head::fact(int a) {
     if (a==1){
         return 1;
     }
