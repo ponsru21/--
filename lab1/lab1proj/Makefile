@@ -1,6 +1,6 @@
 # Компилятор и флаги
 CXX := g++ #CXX - для с++
-CXXFLAGS := -Wall -Wextra -std=c++17 -Iinclude -O1 
+CXXFLAGS := -Wall -Wextra -pthread -std=c++17 -Iinclude 
 TARGET := lab1_app 
 
 # Исходные файлы и объекты
@@ -12,7 +12,7 @@ OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS)) # ищет .сpp, з
 all: $(TARGET) # после всего выполнения будет создан фаил с именем переменной-наша сборка
 
 $(TARGET): $(OBJS) # создание всех .о
-	$(CXX) $(CXXFLAGS) -o $@ $^ 
+	$(CXX) $(CXXFLAGS) -o $@ $^ -lrt
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR) # назначение файлам .о файлы .срр
 	$(CXX) $(CXXFLAGS) -c $< -o $@
@@ -23,6 +23,6 @@ $(OBJ_DIR):
 
 # Очистка
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
+	rm -rf $(OBJ_DIR) $(TARGET) /dev/shm/*sem* /dev/shm/fact_shmem
 
 .PHONY: all clean
