@@ -1,11 +1,10 @@
 #include <iostream>
 #include "../include/lab1head.h"
-#include "lab1fact.cpp"
 using namespace std;
 
 int main () {
     int a;
     cin >> a;
-    cout << fact(a);
+    cout << lab1head::fact(a);
     return 0;
 }

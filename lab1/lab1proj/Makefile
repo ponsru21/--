@@ -1,29 +1,20 @@
 # Компилятор и флаги
 CXX := g++
 CXXFLAGS := -Wall -Wextra -std=c++17 -Iinclude -O1
-TARGET := lab1.app
 
-# Исходные файлы и объекты
-SRC_DIR := src
-OBJ_DIR := obj
-SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+all: lab1app
 
-# Правила сборки
-all: $(TARGET)
+lab1app: lab1main.o lab1fact.o lab1head.o
+	$(CC) lab1main.o lab1fact.o lab1head.o -o lab1app
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+lab1main.o: lab1main.cpp
+	$(CC) $(CFLAGS) lab1main.cpp
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+lab1fact.o: lab1fact.cpp
+	$(CC) $(CFLAGS) lab1fact.cpp
 
-# Создание директории для объектных файлов
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+lab1head.o: lab1head.cpp
+	$(CC) $(CFLAGS) lab1head.cpp
 
-# Очистка
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET)
-
-.PHONY: all clean
+	rm -rf *.o lab1app
