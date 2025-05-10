@@ -1,24 +1,23 @@
 # Компилятор и флаги
-CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++17 -Iinclude -O1
-TARGET := lab1_app
+CXX := g++ #CXX - для с++
+CXXFLAGS := -Wall -Wextra -std=c++17 -Iinclude -O1 
+TARGET := lab1_app 
 
 # Исходные файлы и объекты
-SRC_DIR := src
-OBJ_DIR := obj
-SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+SRC_DIR := src # собирает все файлы из папки scr в переменную
+OBJ_DIR := obj # собирает все файлы из папки obj в переменную
+SRCS := $(wildcard $(SRC_DIR)/*.cpp) # собирает все .cpp
+OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS)) # ищет .сpp, заменяет их на .о , выполняется на .cpp
 
-# Правила сборки
-all: $(TARGET)
+all: $(TARGET) # после всего выполнения будет создан фаил с именем переменной-наша сборка
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+$(TARGET): $(OBJS) # создание всех .о
+	$(CXX) $(CXXFLAGS) -o $@ $^ 
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR) # назначение файлам .о файлы .срр
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Создание директории для объектных файлов
+# Создание папки для .о
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
